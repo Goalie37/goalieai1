@@ -1,0 +1,7 @@
+raw/
+dictionary/
+*.zip
+# Keep season summary CSVs in repo if desired; ignore large shot extracts
+raw/*.csv
+shots*.csv
+*shots*.csv

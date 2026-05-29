@@ -1,0 +1,182 @@
+{
+  "scenario_id": "2026-05-26-2on1-delay",
+  "generated_at": "2026-05-28T16:00:00Z",
+  "situation_classification": ["odd_man_rush"],
+  "visual_cues": [
+    {
+      "description": "Puck carrier on right wing at top of circle, skating toward net with head up",
+      "certainty": "known"
+    },
+    {
+      "description": "Second attacker driving middle lane with stick on ice, trailing carrier by ~10 feet",
+      "certainty": "known"
+    },
+    {
+      "description": "One backchecker from inside, not yet in passing lane",
+      "certainty": "known"
+    },
+    {
+      "description": "Goalie at top of crease, slightly puck-side, on feet and square to carrier",
+      "certainty": "known"
+    },
+    {
+      "description": "Carrier stick curve on left side of blade — inferred LHD",
+      "certainty": "inferred"
+    }
+  ],
+  "scan_checklist": {
+    "puck_carrier": "Right wing, attacking with speed; shot and pass both live",
+    "primary_pass_option": "Middle lane attacker open for cross-crease if goalie commits",
+    "net_front": "Clear — no screen",
+    "weak_side_threat": "Minimal; play is carrier or middle drive",
+    "point_high_support": "None in frame",
+    "defenders": "Single backchecker late; cannot eliminate pass alone",
+    "goalie_depth_angle": "Top of crease, puck-side bias; adequate angle but vulnerable to pass if over-commits"
+  },
+  "primary_read": {
+    "play": "Hold depth at top of crease, delay commitment, stay on feet, square to carrier while keeping middle drive in peripheral vision",
+    "why_now": "2-on-1 with open cross-crease option; backchecker is late; challenging carrier opens pass across",
+    "primary_risk": "Diving at carrier or over-scooting puck-side leaves middle lane one-timer or tap-in"
+  },
+  "outcome_paths": [
+    {
+      "id": "path_1",
+      "label": "Hold depth, delay on carrier",
+      "is_primary": true,
+      "trigger_cues": [
+        "Middle lane drive with stick ready",
+        "Late backchecker",
+        "Carrier has not committed to shot"
+      ],
+      "execution": "Stay at top of crease, match carrier glide, hands ready, eyes on stick; push only when shot or pass is released",
+      "why_right": "Forces carrier to decide; protects cross-crease; backchecker may recover",
+      "why_wrong": "Elite shot from circle can beat you if you give too much space and read shot late",
+      "flip_condition": "If middle drive is covered and carrier's hands commit to shot only, controlled challenge becomes primary"
+    },
+    {
+      "id": "path_2",
+      "label": "Aggressive challenge on carrier",
+      "is_primary": false,
+      "trigger_cues": [
+        "Carrier at circle with no pass lane visible in frame",
+        "Goalie already at top of crease"
+      ],
+      "execution": "Skate out to cut angle, take away five-hole and short side on shot",
+      "why_right": "Cuts shot angle and pressures poor-angle release if pass is not an option",
+      "why_wrong": "Middle lane is open; cross-crease pass beats you before you recover",
+      "flip_condition": "If middle attacker is even with defender or carrier looks pass-only, stay with delay"
+    },
+    {
+      "id": "path_3",
+      "label": "Play pass first — cheat to middle",
+      "is_primary": false,
+      "trigger_cues": [
+        "Carrier's eyes and body angled toward middle",
+        "Middle drive stick on ice"
+      ],
+      "execution": "Shift weight toward middle, be ready for lateral push on pass",
+      "why_right": "Eliminates most dangerous finish if pass is predetermined",
+      "why_wrong": "If carrier shoots, you give up angle and short side on LHD release from right circle",
+      "flip_condition": "If carrier's hands load for shot and eyes stay on net, return to delay and square"
+    },
+    {
+      "id": "path_4",
+      "label": "Drop early to butterfly on approach",
+      "is_primary": false,
+      "trigger_cues": [
+        "Carrier entering scoring area",
+        "Some goalies default to down early on rushes"
+      ],
+      "execution": "Go down before release to cover five-hole",
+      "why_right": "Covers low shot if release is immediate",
+      "why_wrong": "Removes ability to move on pass; cross-crease and deke high beat static goalie",
+      "flip_condition": "Only if carrier has no pass option and is in tight with shot imminent"
+    }
+  ],
+  "handedness_and_screens": {
+    "shooters_handedness": [
+      {
+        "shooter_role": "puck_carrier",
+        "handedness": "LHD",
+        "certainty": "inferred"
+      }
+    ],
+    "off_wing_on_wing_notes": "LHD on right wing is off-wing; one-timer less natural but wrist shot far side and pass to middle remain live",
+    "screen_types": ["none"],
+    "adjustments": "Respect LHD release from right circle to far side if you over-commit; glove must stay disciplined on delay"
+  },
+  "assumptions": {
+    "must_happen": [
+      {
+        "claim": "Pass lane to middle drive must stay open for cross-crease to beat delay",
+        "cue_basis": "Middle attacker stick on ice, no defender in lane",
+        "certainty": "known"
+      }
+    ],
+    "could_happen": [
+      { "branch": "Cross-crease pass", "relative_likelihood_band": "high" },
+      { "branch": "Shot from circle", "relative_likelihood_band": "medium" },
+      { "branch": "Deke / delay by carrier", "relative_likelihood_band": "low" }
+    ],
+    "doesnt_need_to_happen": [
+      {
+        "claim": "Weak-side wrap from poor angle",
+        "why_ruled_out": "Puck on right wing at circle; no play below goal line in frame"
+      }
+    ]
+  },
+  "relationship_map": [
+    {
+      "from": "middle_drive_stick_ready",
+      "edge": "enables",
+      "to": "cross_crease_pass",
+      "note": "Open middle lane with stick down"
+    },
+    {
+      "from": "cross_crease_pass",
+      "edge": "contradicts_read",
+      "to": "challenge_carrier",
+      "note": "Challenge sells out lateral push"
+    },
+    {
+      "from": "late_backchecker",
+      "edge": "supports_read",
+      "to": "delay",
+      "note": "Pass beats you before backchecker arrives if you commit early"
+    }
+  ],
+  "bayesian_branches": [
+    {
+      "branch_id": "pass_branch",
+      "label": "Cross-crease pass",
+      "prior_band": "medium",
+      "posterior_band": "high",
+      "prior_source": "moneypuck",
+      "moneypuck_bucket": "odd_man_rush_5v5",
+      "evidence_for": ["Open middle drive", "Late backchecker", "Carrier head up"],
+      "evidence_against": ["Carrier could shoot before pass"],
+      "sensitivity": "If middle drive were covered, posterior drops to medium"
+    },
+    {
+      "branch_id": "shot_branch",
+      "label": "Shot from circle",
+      "prior_band": "high",
+      "posterior_band": "medium",
+      "prior_source": "moneypuck",
+      "moneypuck_bucket": "odd_man_rush_5v5",
+      "evidence_for": ["Carrier at circle", "Shot always live"],
+      "evidence_against": ["Pass lane open favors pass when goalie must respect middle"],
+      "sensitivity": "If carrier's hands commit to shot only, posterior rises to high"
+    }
+  ],
+  "moneypuck_attribution": "Branch rates are league priors from MoneyPuck.com shot data (odd_man_rush_5v5 bucket). Posteriors updated for this frame's cues.",
+  "confidence": {
+    "level": "high",
+    "unknowns": [],
+    "would_change_read": [
+      "If middle drive is actually covered by a defender not visible in frame",
+      "If carrier is confirmed RHD, short-side shot threat increases on challenge"
+    ]
+  },
+  "metadata_notes": "Rush entering zone, backchecker reaching."
+}

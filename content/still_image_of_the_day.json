@@ -1,0 +1,76 @@
+{
+  "$schema": "../schemas/still_image_metadata_schema.json",
+  "description": "Scenario metadata keyed by scene id (matches viewer/scenes/*.json id). Merged into /api/scenarios and coach prompts. PNG stills in content/stills/ are optional exports only.",
+  "format": {
+    "id": "Unique slug, e.g. 2026-05-28-slot-seam",
+    "date": "ISO date YYYY-MM-DD",
+    "title": "Short display title",
+    "image_path": "Optional — legacy PNG export path under content/stills/ (not used by the app UI)",
+    "level": "youth | junior | college | pro",
+    "tags": ["Array of situation tags matching playbook families"],
+    "situation_hint": "Optional team note — not visible in image; agent should treat as supplemental",
+    "published": "Boolean — whether shown to users",
+    "analysis_status": "pending | analyzed | published",
+    "analysis_scenario_id": "Links to scenario_output.scenario_id when analyzed",
+    "interaction_default": "teach_first | coach_only — teach_first shows image + template before coach breakdown",
+    "coach_reveal_available": "Boolean — user can request full analysis after teach-back review"
+  },
+  "scenarios": [
+    {
+      "id": "2026-05-28-slot-seam-pass",
+      "date": "2026-05-28",
+      "title": "Slot Seam — Pass Across Royal Road",
+      "image_path": "content/stills/2026-05-28-slot-seam-pass.png",
+      "level": "junior",
+      "tags": ["east_west_seam", "net_front_chaos", "one_timer_threat"],
+      "situation_hint": "5v5, puck moving low-to-high then across the slot. Focus on lateral timing.",
+      "published": true,
+      "analysis_status": "pending",
+      "analysis_scenario_id": null,
+      "interaction_default": "teach_first",
+      "coach_reveal_available": true
+    },
+    {
+      "id": "2026-05-27-point-shot-layered-screen",
+      "date": "2026-05-27",
+      "title": "Point Shot Through Layered Screen",
+      "image_path": "content/stills/2026-05-27-point-shot-layered-screen.png",
+      "level": "college",
+      "tags": ["point_shot_traffic", "layered_screen", "tip_threat"],
+      "situation_hint": "5v5, defender boxed out net-front. Shooter at top of circle.",
+      "published": true,
+      "analysis_status": "pending",
+      "analysis_scenario_id": null,
+      "interaction_default": "teach_first",
+      "coach_reveal_available": true
+    },
+    {
+      "id": "2026-05-26-2on1-delay",
+      "date": "2026-05-26",
+      "title": "2-on-1 — Carrier vs. Cross-Crease",
+      "image_path": "content/stills/2026-05-26-2on1-delay.png",
+      "level": "junior",
+      "tags": ["odd_man_rush", "breakaway_adjacent"],
+      "situation_hint": "Rush entering zone, backchecker reaching. No extra context on handedness.",
+      "published": true,
+      "analysis_status": "pending",
+      "analysis_scenario_id": null,
+      "interaction_default": "teach_first",
+      "coach_reveal_available": true
+    },
+    {
+      "id": "2026-05-25-wrap-below-goal-line",
+      "date": "2026-05-25",
+      "title": "Wrap Attempt Below Goal Line",
+      "image_path": "content/stills/2026-05-25-wrap-below-goal-line.png",
+      "level": "youth",
+      "tags": ["oz_cycle_low", "post_integration", "wrap_threat"],
+      "situation_hint": "Cycle play, puck below goal line on strong side.",
+      "published": true,
+      "analysis_status": "pending",
+      "analysis_scenario_id": null,
+      "interaction_default": "teach_first",
+      "coach_reveal_available": true
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GoalieAI — Scene Viewer</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --panel: rgba(16, 22, 30, 0.92);
+        --accent: #4a90d9;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; font-family: system-ui, sans-serif; background: #0b1016; color: #e8edf2; }
+      #app { position: fixed; inset: 0; }
+      #view { width: 100%; height: 100%; display: block; }
+
+      #panel {
+        position: absolute; top: 16px; left: 16px; width: 260px;
+        max-height: calc(100% - 32px); overflow-y: auto;
+        background: var(--panel); border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 14px; padding: 16px; backdrop-filter: blur(8px);
+      }
+      #panel h1 { font-size: 15px; margin: 0 0 2px; }
+      #scene-meta { font-size: 12px; color: #8aa0b3; margin-bottom: 12px; }
+      label.field { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: #8aa0b3; margin: 12px 0 5px; }
+      select, button { font: inherit; }
+      select { width: 100%; padding: 7px 8px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); background: #131b24; color: #e8edf2; }
+
+      .bar { display: flex; flex-wrap: wrap; gap: 6px; }
+      .bar button, #drag-toggle, #reset-btn {
+        flex: 1 1 auto; padding: 7px 8px; border-radius: 8px; cursor: pointer;
+        border: 1px solid rgba(255,255,255,0.12); background: #131b24; color: #e8edf2;
+        font-size: 12px; white-space: nowrap;
+      }
+      .bar button.active, #drag-toggle.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+      .bar button:hover, #drag-toggle:hover, #reset-btn:hover { border-color: var(--accent); }
+
+      .check { display: flex; align-items: center; gap: 8px; font-size: 13px; margin: 6px 0; }
+      .check input { accent-color: var(--accent); }
+
+      #readout {
+        position: absolute; bottom: 38px; right: 16px; max-width: 320px;
+        background: var(--panel); border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 12px; padding: 12px 14px; font-family: ui-monospace, monospace;
+        font-size: 12px; white-space: pre; color: #b8c6d4; line-height: 1.5;
+      }
+      #hint { position: absolute; bottom: 16px; right: 16px; font-size: 12px; color: #6c7d8c; }
+
+      /* Capture mode (?hideui=1): hide all overlay UI for a clean still. */
+      body.capture #panel,
+      body.capture #readout,
+      body.capture #hint,
+      body.capture #embed-bar { display: none; }
+
+      /* Embed mode (?embed=1): full-frame rink for the teach-back app iframe. */
+      #embed-bar {
+        display: none;
+        position: absolute;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        pointer-events: none;
+      }
+      #embed-bar .bar { pointer-events: auto; }
+      #embed-bar .embed-hint {
+        font-size: 11px;
+        color: #6c7d8c;
+        pointer-events: none;
+      }
+      body.embed #panel,
+      body.embed #readout,
+      body.embed #hint { display: none; }
+      body.embed #embed-bar { display: flex; }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="view"></canvas>
+
+      <div id="panel">
+        <h1 id="scene-title">Loading…</h1>
+        <div id="scene-meta"></div>
+
+        <label class="field" for="scene-select">Scenario</label>
+        <select id="scene-select"></select>
+
+        <label class="field">Camera</label>
+        <div class="bar" id="camera-bar"></div>
+
+        <label class="field">Overlays</label>
+        <div class="check"><input type="checkbox" id="ov-royal" checked /><span>Royal road</span></div>
+        <div class="check"><input type="checkbox" id="ov-shot" checked /><span>Shot line</span></div>
+        <div class="check"><input type="checkbox" id="ov-lanes" checked /><span>Pass lanes</span></div>
+
+        <label class="field">Edit</label>
+        <div class="bar">
+          <button id="drag-toggle">Move players: OFF</button>
+        </div>
+        <div class="bar" style="margin-top:6px">
+          <button id="reset-btn">Reset scene</button>
+        </div>
+
+        <label class="field">Export</label>
+        <div class="bar">
+          <button id="export-btn">Export still (PNG)</button>
+        </div>
+      </div>
+
+      <pre id="readout"></pre>
+      <div id="hint">drag to orbit · scroll to zoom</div>
+
+      <div id="embed-bar">
+        <div class="bar" id="embed-camera-bar"></div>
+        <span class="embed-hint">drag to orbit · scroll to zoom</span>
+      </div>
+    </div>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

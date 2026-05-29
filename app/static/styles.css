@@ -1,0 +1,221 @@
+:root {
+  --bg: #0e1116;
+  --panel: #161b22;
+  --border: #2a313a;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --accent: #2f81f7;
+  --accent-hover: #1f6feb;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: rgba(14, 17, 22, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand { font-weight: 600; letter-spacing: 0.2px; }
+.counter { color: var(--muted); font-size: 13px; }
+
+.scene-wrap {
+  position: sticky;
+  top: 44px;
+  z-index: 20;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  transition: height 0.3s ease;
+  height: min(70vh, 560px);
+  overflow: hidden;
+}
+
+.scene-wrap.shrunk { height: min(40vh, 320px); }
+
+.scene-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  background: #0b1016;
+}
+
+.scene-wrap iframe[hidden] { display: none; }
+
+.empty {
+  padding: 40px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.content {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 20px 80px;
+}
+
+.coach-intro {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 22px;
+}
+
+.coach-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.intro-body { color: var(--text); }
+.intro-body p { margin: 6px 0; }
+.intro-loading { color: var(--muted); font-style: italic; }
+
+h1 { font-size: 22px; margin: 8px 0 4px; }
+h2 { font-size: 18px; margin: 0 0 12px; }
+.hint { color: var(--muted); margin: 0 0 20px; }
+
+form label {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+form input,
+form textarea {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 9px 11px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  resize: vertical;
+}
+
+form input:focus,
+form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.actions { margin-top: 16px; display: flex; gap: 10px; }
+
+button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 6px;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+button:hover { background: var(--accent-hover); }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.result {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px 22px;
+  white-space: pre-wrap;
+}
+
+.result h1, .result h2, .result h3, .result h4 { margin-top: 18px; margin-bottom: 6px; }
+.result h1 { font-size: 18px; }
+.result h2 { font-size: 16px; }
+.result h3 { font-size: 15px; }
+.result h4 { font-size: 14px; color: var(--muted); }
+.result code { background: #21262d; padding: 1px 5px; border-radius: 3px; font-size: 13px; }
+.result table { border-collapse: collapse; margin: 8px 0; }
+.result th, .result td { border: 1px solid var(--border); padding: 4px 10px; text-align: left; }
+.result ul, .result ol { padding-left: 22px; }
+
+.loader[hidden] { display: none; }
+
+.loader {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 17, 22, 0.7);
+  backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  color: var(--muted);
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Bayesian Read section */
+#bayes-section {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 22px;
+}
+.bayes-summary { font-size: 13px; color: var(--text); margin-bottom: 12px; line-height: 1.5; }
+.bayes-summary code { background: #21262d; padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+.bayes-observed { margin-top: 4px; color: var(--muted); font-size: 12px; }
+.bayes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 640px) {
+  .bayes-grid { grid-template-columns: 1fr; }
+}
+.bayes-svg {
+  width: 100%; height: auto;
+  background: #0d1620;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  display: block;
+}
+#bayes-method {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--muted);
+}
+#bayes-method summary { cursor: pointer; }
+#bayes-method-text { margin: 6px 0 0 0; }
+

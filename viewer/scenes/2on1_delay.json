@@ -1,0 +1,25 @@
+{
+  "id": "2026-05-26-2on1-delay",
+  "title": "2-on-1 — Carrier vs. Cross-Crease",
+  "situation_family": "odd_man_rush",
+  "manpower": "5v5",
+  "default_camera": "broadcast",
+  "puck": { "x": 69, "y": -20 },
+  "entities": [
+    { "id": "carrier", "label": "carrier", "team": "offense", "role": "carrier", "x": 69, "y": -20, "facing": 45, "stick": "left", "posture": "skating" },
+    { "id": "trailer", "label": "trailer", "team": "offense", "role": "trailer", "x": 58, "y": -4, "facing": 8, "stick": "left", "posture": "stick_ready" },
+    { "id": "wide_o", "label": "", "team": "offense", "role": "wing", "x": 62, "y": 18, "facing": 20, "stick": "right" },
+    { "id": "d1_o", "label": "", "team": "offense", "role": "point", "x": 38, "y": -10, "facing": 0, "stick": "left" },
+    { "id": "d2_o", "label": "", "team": "offense", "role": "point", "x": 33, "y": 8, "facing": 0, "stick": "right" },
+    { "id": "backchecker", "label": "D (back)", "team": "defense", "role": "defender", "x": 74, "y": -8, "facing": 200, "stick": "right" },
+    { "id": "f1_back", "label": "", "team": "defense", "role": "forward", "x": 60, "y": -14, "facing": 200, "stick": "left" },
+    { "id": "f2_back", "label": "", "team": "defense", "role": "forward", "x": 54, "y": 2, "facing": 200, "stick": "right" },
+    { "id": "f3_back", "label": "", "team": "defense", "role": "forward", "x": 47, "y": 16, "facing": 210, "stick": "left" },
+    { "id": "d2_back", "label": "", "team": "defense", "role": "defender", "x": 64, "y": 10, "facing": 200, "stick": "left" },
+    { "id": "goalie", "label": "goalie", "team": "goalie", "role": "goalie", "x": 86, "y": -3, "facing": 225 }
+  ],
+  "overlays": {
+    "royal_road": true,
+    "pass_lanes": [["carrier", "trailer"]]
+  }
+}

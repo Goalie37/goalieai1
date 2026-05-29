@@ -1,0 +1,25 @@
+{
+  "id": "2026-05-25-wrap-below-goal-line",
+  "title": "Wrap Attempt Below Goal Line",
+  "situation_family": "oz_cycle_low",
+  "manpower": "5v5",
+  "default_camera": "behind_net",
+  "puck": { "x": 93, "y": -10 },
+  "entities": [
+    { "id": "carrier", "label": "carrier", "team": "offense", "role": "carrier", "x": 93, "y": -10, "facing": 150, "stick": "left", "posture": "below_goal_line" },
+    { "id": "netfront", "label": "net-front", "team": "offense", "role": "net_front", "x": 84, "y": 4, "facing": 180, "stick": "right", "posture": "screen" },
+    { "id": "weakside", "label": "weak-side", "team": "offense", "role": "weak_side", "x": 78, "y": 16, "facing": 200, "stick": "left", "posture": "stick_ready" },
+    { "id": "point_o", "label": "", "team": "offense", "role": "point", "x": 46, "y": 6, "facing": 5, "stick": "right" },
+    { "id": "halfwall_o", "label": "", "team": "offense", "role": "wing", "x": 72, "y": -24, "facing": 320, "stick": "left" },
+    { "id": "d_netfront", "label": "D", "team": "defense", "role": "defender", "x": 85, "y": 1, "facing": 0, "stick": "left" },
+    { "id": "d_corner", "label": "", "team": "defense", "role": "defender", "x": 90, "y": -16, "facing": 120, "stick": "right" },
+    { "id": "f_low", "label": "", "team": "defense", "role": "forward", "x": 82, "y": -8, "facing": 150, "stick": "left" },
+    { "id": "f_slot", "label": "", "team": "defense", "role": "forward", "x": 76, "y": 0, "facing": 180, "stick": "right" },
+    { "id": "f_weak", "label": "", "team": "defense", "role": "forward", "x": 74, "y": 13, "facing": 200, "stick": "left" },
+    { "id": "goalie", "label": "goalie", "team": "goalie", "role": "goalie", "x": 88, "y": -3, "facing": 170 }
+  ],
+  "overlays": {
+    "royal_road": true,
+    "pass_lanes": [["carrier", "netfront"], ["carrier", "weakside"]]
+  }
+}

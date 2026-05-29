@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://goalieai.local/schemas/still_image_metadata_schema.json",
+  "title": "StillImageOfTheDayCatalog",
+  "description": "Metadata catalog for daily still-image scenarios",
+  "type": "object",
+  "required": ["scenarios"],
+  "properties": {
+    "description": { "type": "string" },
+    "format": { "type": "object" },
+    "scenarios": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/scenario" }
+    }
+  },
+  "$defs": {
+    "scenario": {
+      "type": "object",
+      "required": [
+        "id",
+        "date",
+        "title",
+        "image_path",
+        "level",
+        "tags",
+        "published",
+        "analysis_status"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}-[a-z0-9-]+$"
+        },
+        "date": {
+          "type": "string",
+          "description": "ISO date YYYY-MM-DD"
+        },
+        "title": { "type": "string" },
+        "image_path": { "type": "string" },
+        "level": {
+          "type": "string",
+          "enum": ["youth", "junior", "college", "pro"]
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "situation_hint": { "type": "string" },
+        "published": { "type": "boolean" },
+        "analysis_status": {
+          "type": "string",
+          "enum": ["pending", "analyzed", "published"]
+        },
+        "analysis_scenario_id": {
+          "type": ["string", "null"]
+        },
+        "interaction_default": {
+          "type": "string",
+          "enum": ["teach_first", "coach_only"],
+          "default": "teach_first"
+        },
+        "coach_reveal_available": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    }
+  }
+}

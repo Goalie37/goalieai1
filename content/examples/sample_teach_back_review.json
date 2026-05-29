@@ -1,0 +1,86 @@
+{
+  "scenario_id": "2026-05-26-2on1-delay",
+  "generated_at": "2026-05-28T17:00:00Z",
+  "mode": "review_teaching",
+  "user_submission_summary": "User identified 2-on-1, wanted to challenge carrier early, noted middle drive but ranked shot as main threat; did not mention cross-crease as primary failure mode.",
+  "scorecard": {
+    "visual_grounding": {
+      "score": 4,
+      "note": "Four cues cited; carrier and middle drive accurate; handedness not addressed"
+    },
+    "scan_completeness": {
+      "score": 3,
+      "note": "Carrier and middle drive covered; weak-side and backchecker timing thin"
+    },
+    "read_quality": {
+      "score": 2,
+      "note": "Challenge read contradicts open middle lane in frame"
+    },
+    "threat_identification": {
+      "score": 2,
+      "note": "Named shot but not cross-crease pass as beat-you play"
+    },
+    "metacognition": {
+      "score": 4,
+      "note": "Stated unsure on handedness — good honesty"
+    },
+    "composite": 3.0
+  },
+  "what_you_got_right": [
+    "Correctly classified as odd-man rush with puck on right wing",
+    "Identified second attacker in middle lane with stick ready",
+    "Noted you were at top of crease — appropriate starting depth for delay",
+    "Flagged handedness as unsure instead of guessing"
+  ],
+  "gaps": [
+    {
+      "title": "Challenge vs. delay",
+      "user_said": "I would challenge the carrier at the circle to cut the angle.",
+      "litigation": "You said challenge — that cuts the shot angle when the pass is taken away. In this frame the middle drive is open and the backchecker is late; challenging sells out your lateral push. Playbook §2.1: default is hold depth and delay until commitment.",
+      "playbook_ref": "§2.1 Odd-Man Rush"
+    },
+    {
+      "title": "Beat-you threat",
+      "user_said": "If I'm wrong, they score on the shot.",
+      "litigation": "The shot is live, but the highest-percentage beat-you play on a 2-on-1 with middle drive is cross-crease pass when you over-commit. Naming only the shot understates the pass threat.",
+      "playbook_ref": "§2.1 Odd-Man Rush; §7 Failure: Cross-crease goal"
+    }
+  ],
+  "read_comparison": {
+    "user_read_summary": "Challenge carrier at circle",
+    "coach_read_summary": "Hold depth at top of crease, delay, respect cross-crease",
+    "agreement": "disagree",
+    "why": "Open middle lane and late backchecker favor delay over challenge in this frame"
+  },
+  "assumption_review": {
+    "correct_musts": [],
+    "false_musts": [
+      "User treated shot as the must-happen beat-you play; cross-crease pass is the must for beating a delay read here"
+    ],
+    "missing_branches": [
+      "Cross-crease pass branch not listed in could-happen table",
+      "No doesn't-need section to deprioritize weak-side wrap"
+    ]
+  },
+  "relationship_review": {
+    "user_stated": "Not stated",
+    "valid": false,
+    "missing_edges": [
+      "middle_drive_stick_ready → enables → cross_crease_pass",
+      "cross_crease_pass → contradicts_read → challenge_carrier"
+    ]
+  },
+  "missed_threats": [
+    "Cross-crease pass to middle drive before backchecker arrives",
+    "Carrier pass fake vs. shot at same wind-up"
+  ],
+  "study_points": [
+    "§2.1 Odd-Man Rush — delay default",
+    "§14 Assumption Framework — must happen for cross-crease vs shot",
+    "§13 Relationship Graph — middle drive enables pass, contradicts challenge"
+  ],
+  "next_step": {
+    "action": "either",
+    "message": "Retry teach-back focusing on pass threat and beat-you play, or say 'coach reveal' for the full breakdown with outcome paths."
+  }
+}

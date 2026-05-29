@@ -1,0 +1,25 @@
+{
+  "id": "2026-05-28-slot-seam-pass",
+  "title": "Slot Seam — Pass Across Royal Road",
+  "situation_family": "east_west_seam",
+  "manpower": "5v5",
+  "default_camera": "broadcast",
+  "puck": { "x": 70, "y": 18 },
+  "entities": [
+    { "id": "passer", "label": "passer", "team": "offense", "role": "carrier", "x": 70, "y": 18, "facing": 110, "stick": "right", "posture": "passing" },
+    { "id": "shooter", "label": "one-timer", "team": "offense", "role": "shooter", "x": 72, "y": -16, "facing": 30, "stick": "right", "posture": "stick_ready" },
+    { "id": "netfront", "label": "net-front", "team": "offense", "role": "net_front", "x": 83, "y": 2, "facing": 180, "stick": "left", "posture": "screen" },
+    { "id": "point", "label": "point", "team": "offense", "role": "point", "x": 45, "y": 12, "facing": 5, "stick": "left" },
+    { "id": "weakside_o", "label": "", "team": "offense", "role": "weak_side", "x": 76, "y": -27, "facing": 55, "stick": "left" },
+    { "id": "d_netfront", "label": "D", "team": "defense", "role": "defender", "x": 84, "y": -1, "facing": 0, "stick": "right" },
+    { "id": "d_strong", "label": "", "team": "defense", "role": "defender", "x": 74, "y": 13, "facing": 350, "stick": "left" },
+    { "id": "f_press", "label": "", "team": "defense", "role": "forward", "x": 72, "y": 24, "facing": 0, "stick": "left" },
+    { "id": "f_slot", "label": "", "team": "defense", "role": "forward", "x": 73, "y": -2, "facing": 0, "stick": "right" },
+    { "id": "f_weak", "label": "", "team": "defense", "role": "forward", "x": 75, "y": -21, "facing": 20, "stick": "left" },
+    { "id": "goalie", "label": "goalie", "team": "goalie", "role": "goalie", "x": 85, "y": 8, "facing": 200 }
+  ],
+  "overlays": {
+    "royal_road": true,
+    "pass_lanes": [["passer", "shooter"]]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "2026-05-27-point-shot-layered-screen",
+  "title": "Point Shot Through Layered Screen",
+  "situation_family": "point_shot_traffic",
+  "manpower": "5v5",
+  "default_camera": "broadcast",
+  "puck": { "x": 42, "y": 8 },
+  "entities": [
+    { "id": "shooter", "label": "point", "team": "offense", "role": "shooter", "x": 42, "y": 8, "facing": 5, "stick": "right", "posture": "shooting" },
+    { "id": "screen1", "label": "screen", "team": "offense", "role": "net_front", "x": 82, "y": 1, "facing": 0, "stick": "left", "posture": "screen" },
+    { "id": "screen2", "label": "tip", "team": "offense", "role": "net_front", "x": 79, "y": -3, "facing": 10, "stick": "right", "posture": "tip_ready" },
+    { "id": "point2", "label": "", "team": "offense", "role": "point", "x": 42, "y": -12, "facing": 0, "stick": "left" },
+    { "id": "halfwall_o", "label": "", "team": "offense", "role": "wing", "x": 62, "y": 24, "facing": 340, "stick": "right" },
+    { "id": "defender", "label": "D (box)", "team": "defense", "role": "defender", "x": 81, "y": -1, "facing": 180, "stick": "left" },
+    { "id": "d2_box", "label": "", "team": "defense", "role": "defender", "x": 83, "y": 4, "facing": 180, "stick": "right" },
+    { "id": "f1_point", "label": "", "team": "defense", "role": "forward", "x": 50, "y": 8, "facing": 180, "stick": "left" },
+    { "id": "f2_point", "label": "", "team": "defense", "role": "forward", "x": 50, "y": -12, "facing": 180, "stick": "right" },
+    { "id": "f3_wall", "label": "", "team": "defense", "role": "forward", "x": 64, "y": 20, "facing": 180, "stick": "left" },
+    { "id": "goalie", "label": "goalie", "team": "goalie", "role": "goalie", "x": 87, "y": 1, "facing": 180 }
+  ],
+  "overlays": {
+    "royal_road": true,
+    "pass_lanes": []
+  }
+}

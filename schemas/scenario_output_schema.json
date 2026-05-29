@@ -1,0 +1,308 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://goalieai.local/schemas/scenario_output_schema.json",
+  "title": "GoalieScenarioAnalysis",
+  "description": "Structured output for still-image goaltending scenario analysis",
+  "type": "object",
+  "required": [
+    "scenario_id",
+    "generated_at",
+    "situation_classification",
+    "visual_cues",
+    "scan_checklist",
+    "primary_read",
+    "outcome_paths",
+    "handedness_and_screens",
+    "assumptions",
+    "relationship_map",
+    "bayesian_branches",
+    "confidence"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "scenario_id": {
+      "type": "string",
+      "description": "Matches still_image_of_the_day id or generated slug"
+    },
+    "generated_at": {
+      "type": "string",
+      "description": "ISO 8601 timestamp of analysis"
+    },
+    "situation_classification": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "odd_man_rush",
+          "controlled_entry",
+          "oz_cycle_low",
+          "low_to_high",
+          "east_west_seam",
+          "net_front_chaos",
+          "point_shot_traffic",
+          "breakaway",
+          "other"
+        ]
+      },
+      "minItems": 1
+    },
+    "visual_cues": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["description", "certainty"],
+        "additionalProperties": false,
+        "properties": {
+          "description": { "type": "string" },
+          "certainty": {
+            "type": "string",
+            "enum": ["known", "inferred"]
+          }
+        }
+      }
+    },
+    "scan_checklist": {
+      "type": "object",
+      "required": [
+        "puck_carrier",
+        "primary_pass_option",
+        "net_front",
+        "weak_side_threat",
+        "point_high_support",
+        "defenders",
+        "goalie_depth_angle"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "puck_carrier": { "type": "string" },
+        "primary_pass_option": { "type": "string" },
+        "net_front": { "type": "string" },
+        "weak_side_threat": { "type": "string" },
+        "point_high_support": { "type": "string" },
+        "defenders": { "type": "string" },
+        "goalie_depth_angle": { "type": "string" }
+      }
+    },
+    "primary_read": {
+      "type": "object",
+      "required": ["play", "why_now", "primary_risk"],
+      "additionalProperties": false,
+      "properties": {
+        "play": { "type": "string" },
+        "why_now": { "type": "string" },
+        "primary_risk": { "type": "string" }
+      }
+    },
+    "outcome_paths": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "is_primary",
+          "trigger_cues",
+          "execution",
+          "why_right",
+          "why_wrong",
+          "flip_condition"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^path_[1-5]$"
+          },
+          "label": { "type": "string" },
+          "is_primary": { "type": "boolean" },
+          "trigger_cues": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1
+          },
+          "execution": { "type": "string" },
+          "why_right": { "type": "string" },
+          "why_wrong": { "type": "string" },
+          "flip_condition": { "type": "string" }
+        }
+      }
+    },
+    "handedness_and_screens": {
+      "type": "object",
+      "required": [
+        "shooters_handedness",
+        "off_wing_on_wing_notes",
+        "screen_types",
+        "adjustments"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "shooters_handedness": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["shooter_role", "handedness", "certainty"],
+            "additionalProperties": false,
+            "properties": {
+              "shooter_role": {
+                "type": "string",
+                "description": "e.g. puck_carrier, net_front, weak_side"
+              },
+              "handedness": {
+                "type": "string",
+                "enum": ["LHD", "RHD", "unknown"]
+              },
+              "certainty": {
+                "type": "string",
+                "enum": ["known", "inferred", "unknown"]
+              }
+            }
+          }
+        },
+        "off_wing_on_wing_notes": { "type": "string" },
+        "screen_types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "none",
+              "single_static",
+              "layered",
+              "moving",
+              "late",
+              "stick_screen"
+            ]
+          }
+        },
+        "adjustments": { "type": "string" }
+      }
+    },
+    "confidence": {
+      "type": "object",
+      "required": ["level", "unknowns", "would_change_read"],
+      "additionalProperties": false,
+      "properties": {
+        "level": {
+          "type": "string",
+          "enum": ["high", "medium", "low"]
+        },
+        "unknowns": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "would_change_read": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "metadata_notes": {
+      "type": "string",
+      "description": "Optional echo of team-provided context from still_image_of_the_day"
+    },
+    "assumptions": {
+      "type": "object",
+      "required": ["must_happen", "could_happen", "doesnt_need_to_happen"],
+      "additionalProperties": false,
+      "properties": {
+        "must_happen": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["claim", "cue_basis", "certainty"],
+            "additionalProperties": false,
+            "properties": {
+              "claim": { "type": "string" },
+              "cue_basis": { "type": "string" },
+              "certainty": { "type": "string", "enum": ["known", "inferred"] }
+            }
+          }
+        },
+        "could_happen": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "required": ["branch", "relative_likelihood_band"],
+            "additionalProperties": false,
+            "properties": {
+              "branch": { "type": "string" },
+              "relative_likelihood_band": {
+                "type": "string",
+                "enum": ["high", "medium", "low"]
+              }
+            }
+          }
+        },
+        "doesnt_need_to_happen": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["claim", "why_ruled_out"],
+            "additionalProperties": false,
+            "properties": {
+              "claim": { "type": "string" },
+              "why_ruled_out": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "relationship_map": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "required": ["from", "edge", "to", "note"],
+        "additionalProperties": false,
+        "properties": {
+          "from": { "type": "string" },
+          "edge": {
+            "type": "string",
+            "enum": ["often_follows", "enables", "supports_read", "contradicts_read", "branches_to"]
+          },
+          "to": { "type": "string" },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "bayesian_branches": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": [
+          "branch_id",
+          "label",
+          "prior_band",
+          "posterior_band",
+          "prior_source",
+          "evidence_for",
+          "evidence_against"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "branch_id": { "type": "string" },
+          "label": { "type": "string" },
+          "prior_band": { "type": "string", "enum": ["high", "medium", "low"] },
+          "posterior_band": { "type": "string", "enum": ["high", "medium", "low"] },
+          "prior_source": { "type": "string", "enum": ["moneypuck", "playbook_default"] },
+          "moneypuck_bucket": { "type": "string" },
+          "evidence_for": { "type": "array", "items": { "type": "string" } },
+          "evidence_against": { "type": "array", "items": { "type": "string" } },
+          "sensitivity": { "type": "string" }
+        }
+      }
+    },
+    "moneypuck_attribution": {
+      "type": "string",
+      "description": "Credit line when priors used"
+    }
+  }
+}

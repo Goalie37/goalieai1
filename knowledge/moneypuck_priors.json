@@ -1,0 +1,243 @@
+{
+  "source_url": "https://moneypuck.com/data.htm",
+  "credited_to": "MoneyPuck.com",
+  "generated_at": "2026-05-28T21:40:31.165629+00:00",
+  "input_files": [
+    "goalies_2008_to_2024.csv"
+  ],
+  "data_type": "goalie_season_summary",
+  "rows_aggregated": 8020,
+  "prior_source": "moneypuck",
+  "disclaimer": "League priors for similar situations \u2014 not exact xG for a still image.",
+  "buckets": [
+    {
+      "bucket_id": "league_5v5",
+      "shot_count": 1796480,
+      "goalie_season_rows": 1604,
+      "manpower": "5v5",
+      "p_goal_empirical": 0.0429,
+      "p_goal_xg_mean": 0.0429,
+      "p_rebound_mean": 0.0742,
+      "p_freeze_mean": 0.2342,
+      "data_granularity": "goalie_season_summary",
+      "branches": [
+        {
+          "branch_id": "shot_branch",
+          "label": "Shot on net",
+          "prior_band": "low"
+        },
+        {
+          "branch_id": "rebound_branch",
+          "label": "Rebound after save",
+          "prior_band": "medium"
+        },
+        {
+          "branch_id": "freeze_branch",
+          "label": "Freeze / play stopped",
+          "prior_band": "high"
+        }
+      ]
+    },
+    {
+      "bucket_id": "league_powerplay",
+      "shot_count": 47292,
+      "goalie_season_rows": 1604,
+      "manpower": "5v4",
+      "p_goal_empirical": 0.0611,
+      "p_goal_xg_mean": 0.0604,
+      "p_rebound_mean": 0.0408,
+      "p_freeze_mean": 0.1014,
+      "data_granularity": "goalie_season_summary",
+      "branches": [
+        {
+          "branch_id": "shot_branch",
+          "label": "Shot on net",
+          "prior_band": "medium"
+        },
+        {
+          "branch_id": "rebound_branch",
+          "label": "Rebound after save",
+          "prior_band": "low"
+        },
+        {
+          "branch_id": "freeze_branch",
+          "label": "Freeze / play stopped",
+          "prior_band": "medium"
+        }
+      ]
+    },
+    {
+      "bucket_id": "league_penalty_kill",
+      "shot_count": 325205,
+      "goalie_season_rows": 1604,
+      "manpower": "4v5",
+      "p_goal_empirical": 0.0684,
+      "p_goal_xg_mean": 0.0651,
+      "p_rebound_mean": 0.0972,
+      "p_freeze_mean": 0.2022,
+      "data_granularity": "goalie_season_summary",
+      "branches": [
+        {
+          "branch_id": "shot_branch",
+          "label": "Shot on net",
+          "prior_band": "medium"
+        },
+        {
+          "branch_id": "rebound_branch",
+          "label": "Rebound after save",
+          "prior_band": "medium"
+        },
+        {
+          "branch_id": "freeze_branch",
+          "label": "Freeze / play stopped",
+          "prior_band": "high"
+        }
+      ]
+    },
+    {
+      "bucket_id": "slot_seam_5v5",
+      "shot_count": 63831,
+      "goalie_season_rows": 1604,
+      "manpower": "5v5",
+      "p_goal_empirical": 0.2498,
+      "p_goal_xg_mean": 0.2784,
+      "p_rebound_mean": 0.0742,
+      "p_freeze_mean": 0.2342,
+      "data_granularity": "goalie_season_summary",
+      "branches": [
+        {
+          "branch_id": "shot_branch",
+          "label": "Shot on net (high danger)",
+          "prior_band": "high"
+        },
+        {
+          "branch_id": "rebound_branch",
+          "label": "Rebound after save",
+          "prior_band": "medium"
+        },
+        {
+          "branch_id": "freeze_branch",
+          "label": "Freeze / play stopped",
+          "prior_band": "high"
+        }
+      ]
+    },
+    {
+      "bucket_id": "point_shot_traffic_5v5",
+      "shot_count": 1025019,
+      "goalie_season_rows": 1604,
+      "manpower": "5v5",
+      "p_goal_empirical": 0.0305,
+      "p_goal_xg_mean": 0.029,
+      "p_rebound_mean": 0.0742,
+      "p_freeze_mean": 0.2342,
+      "data_granularity": "goalie_season_summary",
+      "branches": [
+        {
+          "branch_id": "shot_branch",
+          "label": "Shot on net (low danger)",
+          "prior_band": "low"
+        },
+        {
+          "branch_id": "rebound_branch",
+          "label": "Rebound after save",
+          "prior_band": "medium"
+        },
+        {
+          "branch_id": "freeze_branch",
+          "label": "Freeze / play stopped",
+          "prior_band": "high"
+        }
+      ]
+    },
+    {
+      "bucket_id": "medium_danger_5v5",
+      "shot_count": 244030,
+      "goalie_season_rows": 1604,
+      "manpower": "5v5",
+      "p_goal_empirical": 0.1226,
+      "p_goal_xg_mean": 0.1215,
+      "p_rebound_mean": 0.0742,
+      "p_freeze_mean": 0.2342,
+      "data_granularity": "goalie_season_summary",
+      "branches": [
+        {
+          "branch_id": "shot_branch",
+          "label": "Shot on net (medium danger)",
+          "prior_band": "high"
+        },
+        {
+          "branch_id": "rebound_branch",
+          "label": "Rebound after save",
+          "prior_band": "medium"
+        },
+        {
+          "branch_id": "freeze_branch",
+          "label": "Freeze / play stopped",
+          "prior_band": "high"
+        }
+      ]
+    },
+    {
+      "shot_count": 244030,
+      "goalie_season_rows": 1604,
+      "manpower": "5v5",
+      "p_goal_empirical": 0.1226,
+      "p_goal_xg_mean": 0.1215,
+      "p_rebound_mean": 0.0742,
+      "p_freeze_mean": 0.2342,
+      "data_granularity": "goalie_season_summary",
+      "branches": [
+        {
+          "branch_id": "shot_branch",
+          "label": "Shot on net (medium danger)",
+          "prior_band": "high"
+        },
+        {
+          "branch_id": "rebound_branch",
+          "label": "Rebound after save",
+          "prior_band": "medium"
+        },
+        {
+          "branch_id": "freeze_branch",
+          "label": "Freeze / play stopped",
+          "prior_band": "high"
+        }
+      ],
+      "bucket_id": "odd_man_rush_5v5",
+      "derived_from": "medium_danger_5v5",
+      "note": "Proxy: no rush flag in goalie season data; uses 5v5 medium-danger rates."
+    },
+    {
+      "shot_count": 1796480,
+      "goalie_season_rows": 1604,
+      "manpower": "5v5",
+      "p_goal_empirical": 0.0429,
+      "p_goal_xg_mean": 0.0429,
+      "p_rebound_mean": 0.0742,
+      "p_freeze_mean": 0.2342,
+      "data_granularity": "goalie_season_summary",
+      "branches": [
+        {
+          "branch_id": "shot_branch",
+          "label": "Shot on net",
+          "prior_band": "low"
+        },
+        {
+          "branch_id": "rebound_branch",
+          "label": "Rebound after save",
+          "prior_band": "medium"
+        },
+        {
+          "branch_id": "freeze_branch",
+          "label": "Freeze / play stopped",
+          "prior_band": "high"
+        }
+      ],
+      "bucket_id": "net_front_rebound_5v5",
+      "derived_from": "league_5v5",
+      "note": "Uses overall 5v5 rebound rate."
+    }
+  ],
+  "note": "Aggregated from goalie season CSV. For rush/seam/location buckets, add shot-level CSV from data.htm."
+}

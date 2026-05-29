@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GoalieAI</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">GoalieAI</div>
+    <div class="counter" id="counter"></div>
+  </header>
+
+  <div id="scene-wrap" class="scene-wrap">
+    <iframe id="scene-frame" title="3D scenario — drag to orbit, scroll to zoom" hidden></iframe>
+    <div id="empty" class="empty" hidden>
+      No scenarios in <code>viewer/scenes/</code>. Add a <code>.json</code> scene file and refresh.
+    </div>
+  </div>
+
+  <main class="content">
+    <section id="intro-section" class="coach-intro">
+      <div class="coach-label">Coach</div>
+      <article id="intro" class="intro-body">
+        <span class="intro-loading">Reading the scene…</span>
+      </article>
+    </section>
+
+    <section id="bayes-section">
+      <h2>The Math · Bayesian Read</h2>
+      <div id="bayes-summary" class="bayes-summary"></div>
+      <div class="bayes-grid">
+        <div id="bayes-bars" class="bayes-bars"></div>
+        <div id="bayes-rink" class="bayes-rink"></div>
+      </div>
+      <details id="bayes-method">
+        <summary>How this is computed</summary>
+        <p id="bayes-method-text"></p>
+      </details>
+    </section>
+
+    <section id="analysis-section">
+      <h2 id="analysis-title">Coach Analysis</h2>
+      <article id="analysis" class="result">
+        <span class="intro-loading">Building the full breakdown…</span>
+      </article>
+      <div class="actions">
+        <button id="next-btn">Refresh — new shot →</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

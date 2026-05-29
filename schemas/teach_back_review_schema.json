@@ -1,0 +1,170 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://goalieai.local/schemas/teach_back_review_schema.json",
+  "title": "GoalieTeachBackReview",
+  "description": "Agent review of user-submitted situation teaching",
+  "type": "object",
+  "required": [
+    "scenario_id",
+    "generated_at",
+    "mode",
+    "scorecard",
+    "what_you_got_right",
+    "gaps",
+    "read_comparison",
+    "missed_threats",
+    "study_points",
+    "next_step",
+    "assumption_review",
+    "relationship_review"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "scenario_id": { "type": "string" },
+    "generated_at": { "type": "string" },
+    "mode": {
+      "type": "string",
+      "enum": ["review_teaching", "coach_reveal_delta"]
+    },
+    "user_submission_summary": {
+      "type": "string",
+      "description": "Brief paraphrase of what the user taught"
+    },
+    "scorecard": {
+      "type": "object",
+      "required": [
+        "visual_grounding",
+        "scan_completeness",
+        "read_quality",
+        "threat_identification",
+        "metacognition",
+        "composite"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "visual_grounding": { "$ref": "#/$defs/scored_dimension" },
+        "scan_completeness": { "$ref": "#/$defs/scored_dimension" },
+        "read_quality": { "$ref": "#/$defs/scored_dimension" },
+        "threat_identification": { "$ref": "#/$defs/scored_dimension" },
+        "metacognition": { "$ref": "#/$defs/scored_dimension" },
+        "composite": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 5
+        }
+      }
+    },
+    "what_you_got_right": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 0
+    },
+    "gaps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["title", "user_said", "litigation", "playbook_ref"],
+        "additionalProperties": false,
+        "properties": {
+          "title": { "type": "string" },
+          "user_said": { "type": "string" },
+          "litigation": { "type": "string" },
+          "playbook_ref": { "type": "string" }
+        }
+      }
+    },
+    "read_comparison": {
+      "type": "object",
+      "required": [
+        "user_read_summary",
+        "coach_read_summary",
+        "agreement",
+        "why"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "user_read_summary": { "type": "string" },
+        "coach_read_summary": { "type": "string" },
+        "agreement": {
+          "type": "string",
+          "enum": ["full", "partial", "disagree"]
+        },
+        "why": { "type": "string" }
+      }
+    },
+    "missed_threats": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "study_points": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "maxItems": 3
+    },
+    "next_step": {
+      "type": "object",
+      "required": ["action", "message"],
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": ["retry_teach_back", "coach_reveal", "either"]
+        },
+        "message": { "type": "string" }
+      }
+    },
+    "assumption_review": {
+      "type": "object",
+      "required": ["correct_musts", "false_musts", "missing_branches"],
+      "additionalProperties": false,
+      "properties": {
+        "correct_musts": { "type": "array", "items": { "type": "string" } },
+        "false_musts": { "type": "array", "items": { "type": "string" } },
+        "missing_branches": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "relationship_review": {
+      "type": "object",
+      "required": ["user_stated", "valid", "missing_edges"],
+      "additionalProperties": false,
+      "properties": {
+        "user_stated": { "type": "string" },
+        "valid": { "type": "boolean" },
+        "missing_edges": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "teach_back_delta": {
+      "type": "object",
+      "description": "Present only when mode is coach_reveal_delta",
+      "properties": {
+        "you_had_right": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "coach_adds": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "read_change": { "type": "string" },
+        "focus_next_rep": { "type": "string" }
+      }
+    }
+  },
+  "$defs": {
+    "scored_dimension": {
+      "type": "object",
+      "required": ["score", "note"],
+      "additionalProperties": false,
+      "properties": {
+        "score": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "note": { "type": "string" }
+      }
+    }
+  }
+}

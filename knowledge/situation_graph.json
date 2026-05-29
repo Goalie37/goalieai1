@@ -1,0 +1,38 @@
+{
+  "version": "1.0",
+  "nodes": [
+    { "id": "odd_man_rush", "type": "situation_family" },
+    { "id": "east_west_seam", "type": "situation_family" },
+    { "id": "point_shot_traffic", "type": "situation_family" },
+    { "id": "oz_cycle_low", "type": "situation_family" },
+    { "id": "low_to_high", "type": "situation_family" },
+    { "id": "net_front_chaos", "type": "situation_family" },
+    { "id": "breakaway", "type": "situation_family" },
+    { "id": "middle_drive_stick_ready", "type": "cue" },
+    { "id": "open_seam", "type": "cue" },
+    { "id": "layered_screen", "type": "cue" },
+    { "id": "late_backchecker", "type": "cue" },
+    { "id": "cross_crease_pass", "type": "threat" },
+    { "id": "one_timer", "type": "threat" },
+    { "id": "wrap", "type": "threat" },
+    { "id": "delay", "type": "goalie_read" },
+    { "id": "challenge_carrier", "type": "goalie_read" },
+    { "id": "lateral_load", "type": "goalie_read" },
+    { "id": "post_lean_rvh", "type": "goalie_read" },
+    { "id": "deep_set", "type": "goalie_read" }
+  ],
+  "edges": [
+    { "from": "middle_drive_stick_ready", "to": "cross_crease_pass", "type": "enables" },
+    { "from": "cross_crease_pass", "to": "challenge_carrier", "type": "contradicts_read" },
+    { "from": "late_backchecker", "to": "delay", "type": "supports_read", "context": "odd_man_rush" },
+    { "from": "odd_man_rush", "to": "delay", "type": "supports_read" },
+    { "from": "open_seam", "to": "one_timer", "type": "enables" },
+    { "from": "open_seam", "to": "challenge_carrier", "type": "contradicts_read", "context": "east_west_seam" },
+    { "from": "east_west_seam", "to": "lateral_load", "type": "supports_read" },
+    { "from": "layered_screen", "to": "deep_set", "type": "supports_read", "context": "point_shot_traffic" },
+    { "from": "oz_cycle_low", "to": "wrap", "type": "enables" },
+    { "from": "wrap", "to": "post_lean_rvh", "type": "supports_read" },
+    { "from": "oz_cycle_low", "to": "low_to_high", "type": "often_follows" },
+    { "from": "low_to_high", "to": "point_shot_traffic", "type": "often_follows" }
+  ]
+}

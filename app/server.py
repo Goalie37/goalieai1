@@ -9,8 +9,12 @@ from __future__ import annotations
 import datetime as dt
 import json
 import os
+import sys
 from pathlib import Path
 from typing import Literal
+
+# Allow `python3 app/server.py` from the project root.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from claude_agent_sdk import ClaudeAgentOptions, query
 from fastapi import FastAPI, HTTPException

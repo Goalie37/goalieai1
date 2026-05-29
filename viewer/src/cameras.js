@@ -2,6 +2,7 @@
 // same scene can be viewed broadcast-style, from behind the net, the
 // goalie's eyes, or straight overhead.
 
+import * as THREE from "three";
 import { rinkToWorld } from "./rink.js";
 
 function entityWorld(sceneData, role, fallbackX, fallbackY) {

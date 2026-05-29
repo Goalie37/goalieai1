@@ -26,20 +26,29 @@ async function loadRandomShot() {
   $("bayes-rink").innerHTML = "";
   $("bayes-method-text").textContent = "";
   try {
-    const r = await fetch("/api/random-shot").then((r) => r.json());
+    const res = await fetch("/api/random-shot");
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(`HTTP ${res.status}: ${text}`);
+    }
+    const r = await res.json();
     state.current = r;
     $("scene-frame").src = sceneViewerUrl(r.slug);
     $("scene-frame").hidden = false;
     $("empty").hidden = true;
     const src = r.scene.source || {};
     $("counter").textContent =
-      `${src.shooter || "shot"} · ${r.scene.situation_family.replaceAll("_", " ")} · ${r.scene.manpower}` +
+      `${src.shooter || "shot"} · ${(r.scene.situation_family || "").replaceAll("_", " ")} · ${r.scene.manpower}` +
       (src.season ? ` · ${src.season}` : "");
     renderBayes(r);
     loadIntro(r.slug);
     loadAnalysis(r.slug);
   } catch (err) {
-    $("bayes-summary").textContent = "Could not sample a shot. Did you run scripts/build_priors.py?";
+    console.error("random-shot failed", err);
+    $("bayes-summary").innerHTML =
+      `<b>Sampler error.</b> Open DevTools → Network → <code>/api/random-shot</code> ` +
+      `to see the response body, or check the server console.<br>` +
+      `<code>${(err && err.message) || err}</code>`;
   }
 }
 

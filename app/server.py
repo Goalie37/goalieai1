@@ -258,16 +258,23 @@ def list_scenarios() -> dict:
 @app.get("/api/random-shot")
 def random_shot() -> dict:
     """Sample one MoneyPuck shot and return slug + scene + Bayesian posterior."""
-    df = _shots_df()
-    row = df.sample(n=1).iloc[0].to_dict()
-    scene = scene_from_row(row)
-    feats = bayes_features(row)
-    post = bayes.posterior(
-        zone=feats["zone"],
-        manpower=feats["manpower"],
-        hex_cell=feats["hex_cell"],
-        goalie_id=feats["goalie_id"],
-    )
+    try:
+        df = _shots_df()
+    except Exception as e:
+        raise HTTPException(503, f"Shot index unavailable: {e}")
+    try:
+        row = df.sample(n=1).iloc[0].to_dict()
+        scene = scene_from_row(row)
+        feats = bayes_features(row)
+        post = bayes.posterior(
+            zone=feats["zone"],
+            manpower=feats["manpower"],
+            hex_cell=feats["hex_cell"],
+            goalie_id=feats["goalie_id"],
+        )
+    except Exception as e:
+        import traceback
+        raise HTTPException(500, f"Sampling failed: {type(e).__name__}: {e}\n{traceback.format_exc()[-800:]}")
     payload = {
         "slug": scene["id"],
         "scene": scene,

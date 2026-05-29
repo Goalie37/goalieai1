@@ -17,7 +17,7 @@ export const PRESETS = [
   "broadcast",
   "behind_net",
   "goalie_pov",
-  "shooter_pov",
+  "puck_pov",
   "overhead",
 ];
 
@@ -25,7 +25,7 @@ export const PRESET_LABELS = {
   broadcast: "Broadcast",
   behind_net: "Behind Net",
   goalie_pov: "Goalie POV",
-  shooter_pov: "Shooter POV",
+  puck_pov: "Puck POV",
   overhead: "Overhead",
 };
 
@@ -50,19 +50,16 @@ export function cameraPose(preset, sceneData) {
         fov: 60,
       };
 
-    case "shooter_pov": {
-      // From the shooter's eyes (about 5.5 ft up), at the puck, looking at
-      // the middle of the net. Step back ~2 ft so the puck stays in frame.
+    case "puck_pov": {
+      // Sit on the puck (just above the ice) looking at the middle of the net.
+      // Wide FOV so you see traffic, screens, and the goalie's stance.
       const eye = puck.clone();
-      eye.y = 5.5;
+      eye.y = 0.6;
       const netCenter = rinkToWorld(89, 0, 2);
-      const toNet = new THREE.Vector3().subVectors(netCenter, eye);
-      const back = toNet.clone().setY(0).normalize().multiplyScalar(-2);
-      eye.add(back);
       return {
         position: eye,
         target: netCenter,
-        fov: 70,
+        fov: 80,
       };
     }
 

@@ -135,15 +135,19 @@ function dashedLine(a, b, color, y = 0.3) {
 }
 
 /** Dashed segment using true 3D endpoints (e.g. puck on ice → back of net). */
-function dashedLine3D(a, b, color) {
+function dashedLine3D(a, b, color, { onTop = false, linewidth = 1 } = {}) {
   const geo = new THREE.BufferGeometry().setFromPoints([a.clone(), b.clone()]);
   const mat = new THREE.LineDashedMaterial({
     color,
     dashSize: 2,
     gapSize: 1.4,
+    linewidth,
+    depthTest: !onTop,
+    transparent: onTop,
   });
   const line = new THREE.Line(geo, mat);
   line.computeLineDistances();
+  if (onTop) line.renderOrder = 999;
   return line;
 }
 
@@ -166,7 +170,9 @@ function rebuildOverlays() {
   if (document.getElementById("ov-shot")?.checked !== false) {
     const shot = shotLineEndpoints();
     if (shot) {
-      group.add(dashedLine3D(shot.origin, shot.goal, 0xe74c3c));
+      // Always-on-top so the trajectory visibly cuts through the crease,
+      // the goalie, and the netting all the way to the back of the net.
+      group.add(dashedLine3D(shot.origin, shot.goal, 0xe74c3c, { onTop: true }));
     }
   }
 

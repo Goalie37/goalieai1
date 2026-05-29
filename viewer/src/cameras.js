@@ -13,12 +13,19 @@ function entityWorld(sceneData, role, fallbackX, fallbackY) {
   return rinkToWorld(fallbackX, fallbackY, 0);
 }
 
-export const PRESETS = ["broadcast", "behind_net", "goalie_pov", "overhead"];
+export const PRESETS = [
+  "broadcast",
+  "behind_net",
+  "goalie_pov",
+  "shooter_pov",
+  "overhead",
+];
 
 export const PRESET_LABELS = {
   broadcast: "Broadcast",
   behind_net: "Behind Net",
   goalie_pov: "Goalie POV",
+  shooter_pov: "Shooter POV",
   overhead: "Overhead",
 };
 
@@ -42,6 +49,22 @@ export function cameraPose(preset, sceneData) {
         target: rinkToWorld(55, 0, 2),
         fov: 60,
       };
+
+    case "shooter_pov": {
+      // From the shooter's eyes (about 5.5 ft up), at the puck, looking at
+      // the middle of the net. Step back ~2 ft so the puck stays in frame.
+      const eye = puck.clone();
+      eye.y = 5.5;
+      const netCenter = rinkToWorld(89, 0, 2);
+      const toNet = new THREE.Vector3().subVectors(netCenter, eye);
+      const back = toNet.clone().setY(0).normalize().multiplyScalar(-2);
+      eye.add(back);
+      return {
+        position: eye,
+        target: netCenter,
+        fov: 70,
+      };
+    }
 
     case "goalie_pov": {
       // Eye height (~5.2 ft) at the goalie, nudged slightly toward the play.
